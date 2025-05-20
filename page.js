@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"; 
 import {
   getFirestore,
   collection,
@@ -55,6 +55,10 @@ async function loadEquipment() {
     sheetCell.appendChild(button);
     sheetCell.appendChild(datasheet);
 
+    // Armoire Number cell
+    const armoireCell = document.createElement("td");
+    armoireCell.textContent = data.armoireNumber || "";
+
     // Actions cell with Delete button
     const actionCell = document.createElement("td");
     const deleteBtn = document.createElement("button");
@@ -72,6 +76,7 @@ async function loadEquipment() {
 
     row.appendChild(nameCell);
     row.appendChild(sheetCell);
+    row.appendChild(armoireCell);
     row.appendChild(actionCell);
 
     tableBody.appendChild(row);
@@ -84,13 +89,14 @@ document.getElementById("addForm").addEventListener("submit", async e => {
 
   const name = document.getElementById("equipName").value.trim();
   const datasheet = document.getElementById("datasheetText").value.trim();
+  const armoireNumber = document.getElementById("armoireNumber").value.trim();
 
-  if (!name || !datasheet) {
-    alert("Please fill in both fields.");
+  if (!name || !datasheet || !armoireNumber) {
+    alert("Please fill in all fields.");
     return;
   }
 
-  await addDoc(equipmentRef, { name, datasheet });
+  await addDoc(equipmentRef, { name, datasheet, armoireNumber });
 
   // Reset form fields
   e.target.reset();
