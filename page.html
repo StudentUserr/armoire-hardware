@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Armoire Hardware Info</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+  body {
+    background: #0f0f1a;
+    color: #00ffd5;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 8px #00ffd5;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #111126;
+    box-shadow: 0 0 15px #00ffd5aa;
+  }
+
+  th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #00ffd5aa;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: #001f2a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  tr:hover {
+    background: #003c4a;
+  }
+
+  a, button.expand-btn {
+    color: #00ffc1;
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    font-family: 'Orbitron', monospace;
+    padding: 0;
+    margin: 0;
+  }
+
+  a:hover, button.expand-btn:hover {
+    color: #00ff9e;
+  }
+
+  button.delete-btn {
+    background: #ff004f;
+    border: none;
+    padding: 8px 14px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  button.delete-btn:hover {
+    background: #d1003f;
+  }
+
+  #addForm {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  #addForm input[type="text"], #addForm textarea {
+    padding: 8px 12px;
+    font-family: 'Orbitron', monospace;
+    font-size: 16px;
+    border: 1.5px solid #00ffd5;
+    background: #111126;
+    color: #00ffd5;
+    border-radius: 5px;
+    outline: none;
+    width: 40%;
+    resize: vertical;
+  }
+
+  #addForm input::placeholder, #addForm textarea::placeholder {
+    color: #00ffc1aa;
+  }
+
+  #addForm button {
+    background: #00ffd5;
+    border: none;
+    padding: 12px 25px;
+    font-family: 'Orbitron', monospace;
+    font-weight: bold;
+    font-size: 16px;
+    color: #111126;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  #addForm button:hover {
+    background: #00cca9;
+  }
+</style>
+</head>
+<body>
+
+<h1>Armoire Equipment List</h1>
+
+<table id="equipmentTable">
+  <thead>
+    <tr>
+      <th>Equipment</th>
+      <th>Datasheet</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Equipment rows inserted here -->
+  </tbody>
+</table>
+
+<form id="addForm">
+  <input type="text" id="equipName" placeholder="Equipment Name" required />
+  <textarea id="datasheetText" placeholder="Datasheet text here..." rows="2" required></textarea>
+  <button type="submit">Add Equipment</button>
+</form>
+
+<script type="module" src="page.js"></script>
+
+</body>
+</html>
