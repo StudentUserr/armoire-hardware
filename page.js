@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"; 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import {
   getFirestore,
   collection,
@@ -8,7 +8,7 @@ import {
   doc
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-// Your Firebase project configuration
+// Your Firebase config:
 const firebaseConfig = {
   apiKey: "AIzaSyD-rWV2rQ-CIksd825JxJw5Hlb430hm2Eo",
   authDomain: "armoire-equipments.firebaseapp.com",
@@ -18,26 +18,29 @@ const firebaseConfig = {
   appId: "1:893663162061:web:de1b3b8b611d47482c8384"
 };
 
-// Initialize Firebase and Firestore
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const equipmentRef = collection(db, "equipment");
 
-// Load and render all equipment entries
-async function loadEquipment() {
+// Load and render equipment; filter by search string (lowercase)
+async function loadEquipment(filter = "") {
   const snapshot = await getDocs(equipmentRef);
   const tableBody = document.querySelector("#equipmentTable tbody");
   tableBody.innerHTML = "";
 
   snapshot.forEach(docSnap => {
     const data = docSnap.data();
+    const match = data.name.toLowerCase().includes(filter) || (data.armoire || "").toLowerCase().includes(filter);
+    if (!match) return;
+
     const row = document.createElement("tr");
 
     // Equipment Name cell
     const nameCell = document.createElement("td");
     nameCell.textContent = data.name;
 
-    // Datasheet cell with expandable text
+    // Datasheet cell with expandable button
     const sheetCell = document.createElement("td");
     const button = document.createElement("button");
     button.textContent = "View Datasheet";
@@ -46,7 +49,7 @@ async function loadEquipment() {
     const datasheet = document.createElement("p");
     datasheet.textContent = data.datasheet;
     datasheet.style.display = "none";
-    datasheet.style.whiteSpace = "pre-wrap"; // preserve line breaks
+    datasheet.style.whiteSpace = "pre-wrap";
 
     button.onclick = () => {
       datasheet.style.display = datasheet.style.display === "none" ? "block" : "none";
@@ -68,7 +71,7 @@ async function loadEquipment() {
     deleteBtn.onclick = async () => {
       if (confirm(`Delete equipment "${data.name}"?`)) {
         await deleteDoc(doc(db, "equipment", docSnap.id));
-        loadEquipment();
+        loadEquipment(filter);
       }
     };
 
@@ -83,7 +86,7 @@ async function loadEquipment() {
   });
 }
 
-// Add new equipment handler
+// Add equipment handler
 document.getElementById("addForm").addEventListener("submit", async e => {
   e.preventDefault();
 
@@ -98,11 +101,14 @@ document.getElementById("addForm").addEventListener("submit", async e => {
 
   await addDoc(equipmentRef, { name, datasheet, armoire });
 
-  // Reset form fields
   e.target.reset();
-
-  // Reload list
   loadEquipment();
+});
+
+// Search input filter
+document.getElementById("searchInput").addEventListener("input", e => {
+  const filter = e.target.value.trim().toLowerCase();
+  loadEquipment(filter);
 });
 
 // Initial load
