@@ -1,226 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Armoire Hardware Info</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Armoire Hardware Info</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
-  body {
-    background: #0f0f1a;
-    color: #00ffd5;
-    font-family: 'Orbitron', sans-serif;
-    margin: 0;
-    padding: 20px;
-  }
-
-  h1 {
-    text-align: center;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-    letter-spacing: 3px;
-    text-shadow: 0 0 8px #00ffd5;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #111126;
-    box-shadow: 0 0 15px #00ffd5aa;
-  }
-
-  th, td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #00ffd5aa;
-    text-align: left;
-    vertical-align: top;
-  }
-
-  th {
-    background: #001f2a;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-
-  tr:hover {
-    background: #003c4a;
-  }
-
-  a, button.expand-btn {
-    color: #00ffc1;
-    background: none;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: underline;
-    font-family: 'Orbitron', monospace;
-    padding: 0;
-    margin: 0;
-  }
-
-  a:hover, button.expand-btn:hover {
-    color: #00ff9e;
-  }
-
-  button.delete-btn {
-    background: #ff004f;
-    border: none;
-    padding: 8px 14px;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.3s ease;
-  }
-
-  button.delete-btn:hover {
-    background: #d1003f;
-  }
-
-  #addForm {
-    margin-top: 25px;
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  #addForm input[type="text"], #addForm textarea {
-    padding: 8px 12px;
-    font-family: 'Orbitron', monospace;
-    font-size: 16px;
-    border: 1.5px solid #00ffd5;
-    background: #111126;
-    color: #00ffd5;
-    border-radius: 5px;
-    outline: none;
-    width: 30%;
-    resize: vertical;
-  }
-
-  #addForm input::placeholder, #addForm textarea::placeholder {
-    color: #00ffc1aa;
-  }
-
-  #addForm button {
-    background: #00ffd5;
-    border: none;
-    padding: 12px 25px;
-    font-family: 'Orbitron', monospace;
-    font-weight: bold;
-    font-size: 16px;
-    color: #111126;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-
-  #addForm button:hover {
-    background: #00cca9;
-  }
-
-  /* Mobile Responsive Styles */
-  @media (max-width: 600px) {
     body {
-      padding: 10px;
-      font-size: 14px;
+      background: #0f0f1a;
+      color: #00ffd5;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 20px;
     }
 
     h1 {
-      font-size: 1.5rem;
-      letter-spacing: 1.5px;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      letter-spacing: 3px;
+      text-shadow: 0 0 8px #00ffd5;
     }
 
-    table, thead, tbody, th, td, tr {
+    #searchInput {
+      padding: 10px;
+      width: 60%;
+      border: 1.5px solid #00ffd5;
+      background: #111126;
+      color: #00ffd5;
+      font-family: 'Orbitron', monospace;
+      border-radius: 5px;
+      margin: 0 auto 20px;
       display: block;
     }
 
-    thead tr {
-      display: none; /* Hide table headers on mobile */
-    }
-
-    tr {
-      margin-bottom: 15px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
       background: #111126;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #00ffd5aa;
+      box-shadow: 0 0 15px #00ffd5aa;
     }
 
-    td {
-      padding: 8px 10px;
-      position: relative;
-      padding-left: 50%;
-      text-align: left;
-      border: none;
+    th, td {
+      padding: 12px 15px;
       border-bottom: 1px solid #00ffd5aa;
+      text-align: left;
+      vertical-align: top;
     }
 
-    td::before {
-      position: absolute;
-      top: 8px;
-      left: 10px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
+    th {
+      background: #001f2a;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    tr:hover {
+      background: #003c4a;
+    }
+
+    a, button.expand-btn {
+      color: #00ffc1;
+      background: none;
+      border: none;
       font-weight: bold;
-      color: #00ffd5;
+      cursor: pointer;
+      text-decoration: underline;
+      font-family: 'Orbitron', monospace;
+      padding: 0;
+      margin: 0;
     }
 
-    /* Labels for each column in td::before */
-    td:nth-of-type(1)::before { content: "Equipment"; }
-    td:nth-of-type(2)::before { content: "Datasheet"; }
-    td:nth-of-type(3)::before { content: "Armoire Number"; }
-    td:nth-of-type(4)::before { content: "Actions"; }
+    a:hover, button.expand-btn:hover {
+      color: #00ff9e;
+    }
+
+    button.delete-btn {
+      background: #ff004f;
+      border: none;
+      padding: 8px 14px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    button.delete-btn:hover {
+      background: #d1003f;
+    }
 
     #addForm {
-      flex-direction: column;
-      gap: 12px;
+      margin-top: 25px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    #addForm input[type="text"],
-    #addForm textarea {
-      width: 100%;
+    #addForm input[type="text"], #addForm textarea {
+      padding: 8px 12px;
+      font-family: 'Orbitron', monospace;
+      font-size: 16px;
+      border: 1.5px solid #00ffd5;
+      background: #111126;
+      color: #00ffd5;
+      border-radius: 5px;
+      outline: none;
+      width: 30%;
+      resize: vertical;
+    }
+
+    #addForm input::placeholder, #addForm textarea::placeholder {
+      color: #00ffc1aa;
     }
 
     #addForm button {
-      width: 100%;
+      background: #00ffd5;
+      border: none;
+      padding: 12px 25px;
+      font-family: 'Orbitron', monospace;
+      font-weight: bold;
+      font-size: 16px;
+      color: #111126;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
 
-    button.expand-btn, button.delete-btn {
-      font-size: 14px;
-      padding: 6px 10px;
+    #addForm button:hover {
+      background: #00cca9;
     }
-  }
-</style>
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        letter-spacing: 1.5px;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead tr {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 15px;
+        background: #111126;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px #00ffd5aa;
+      }
+
+      td {
+        padding: 8px 10px;
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid #00ffd5aa;
+      }
+
+      td::before {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #00ffd5;
+      }
+
+      td:nth-of-type(1)::before { content: "Equipment"; }
+      td:nth-of-type(2)::before { content: "Datasheet"; }
+      td:nth-of-type(3)::before { content: "Armoire Number"; }
+      td:nth-of-type(4)::before { content: "Actions"; }
+
+      #addForm {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      #addForm input[type="text"],
+      #addForm textarea {
+        width: 100%;
+      }
+
+      #addForm button {
+        width: 100%;
+      }
+
+      button.expand-btn, button.delete-btn {
+        font-size: 14px;
+        padding: 6px 10px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<h1>Armoire Equipment List</h1>
+  <h1>Armoire Equipment List</h1>
 
-<table id="equipmentTable">
-  <thead>
-    <tr>
-      <th>Equipment</th>
-      <th>Datasheet</th>
-      <th>Armoire Number</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Equipment rows inserted here -->
-  </tbody>
-</table>
+  <input type="text" id="searchInput" placeholder="Search by Equipment or Armoire..." />
 
-<form id="addForm">
-  <input type="text" id="equipName" placeholder="Equipment Name" required />
-  <textarea id="datasheetText" placeholder="Datasheet text here..." rows="2" required></textarea>
-  <input type="text" id="armoireNumber" placeholder="Armoire Number" required />
-  <button type="submit">Add Equipment</button>
-</form>
+  <table id="equipmentTable">
+    <thead>
+      <tr>
+        <th>Equipment</th>
+        <th>Datasheet</th>
+        <th>Armoire Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Equipment rows inserted here -->
+    </tbody>
+  </table>
 
-<script type="module" src="page.js"></script>
+  <form id="addForm">
+    <input type="text" id="equipName" placeholder="Equipment Name" required />
+    <textarea id="datasheetText" placeholder="Datasheet text here..." rows="2" required></textarea>
+    <input type="text" id="armoireNumber" placeholder="Armoire Number" required />
+    <button type="submit">Add Equipment</button>
+  </form>
 
+  <script type="module" src="page.js"></script>
 </body>
 </html>
