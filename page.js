@@ -57,7 +57,7 @@ async function loadEquipment() {
 
     // Armoire Number cell
     const armoireCell = document.createElement("td");
-    armoireCell.textContent = data.armoireNumber || "";
+    armoireCell.textContent = data.armoire || "—";
 
     // Actions cell with Delete button
     const actionCell = document.createElement("td");
@@ -89,14 +89,14 @@ document.getElementById("addForm").addEventListener("submit", async e => {
 
   const name = document.getElementById("equipName").value.trim();
   const datasheet = document.getElementById("datasheetText").value.trim();
-  const armoireNumber = document.getElementById("armoireNumber").value.trim();
+  const armoire = document.getElementById("armoireNumber").value.trim();
 
-  if (!name || !datasheet || !armoireNumber) {
+  if (!name || !datasheet || !armoire) {
     alert("Please fill in all fields.");
     return;
   }
 
-  await addDoc(equipmentRef, { name, datasheet, armoireNumber });
+  await addDoc(equipmentRef, { name, datasheet, armoire });
 
   // Reset form fields
   e.target.reset();
