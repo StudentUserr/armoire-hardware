@@ -119,6 +119,80 @@
   #addForm button:hover {
     background: #00cca9;
   }
+
+  /* Mobile Responsive Styles */
+  @media (max-width: 600px) {
+    body {
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      letter-spacing: 1.5px;
+    }
+
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+
+    thead tr {
+      display: none; /* Hide table headers on mobile */
+    }
+
+    tr {
+      margin-bottom: 15px;
+      background: #111126;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00ffd5aa;
+    }
+
+    td {
+      padding: 8px 10px;
+      position: relative;
+      padding-left: 50%;
+      text-align: left;
+      border: none;
+      border-bottom: 1px solid #00ffd5aa;
+    }
+
+    td::before {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      font-weight: bold;
+      color: #00ffd5;
+    }
+
+    /* Labels for each column in td::before */
+    td:nth-of-type(1)::before { content: "Equipment"; }
+    td:nth-of-type(2)::before { content: "Datasheet"; }
+    td:nth-of-type(3)::before { content: "Armoire Number"; }
+    td:nth-of-type(4)::before { content: "Actions"; }
+
+    #addForm {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #addForm input[type="text"],
+    #addForm textarea {
+      width: 100%;
+    }
+
+    #addForm button {
+      width: 100%;
+    }
+
+    button.expand-btn, button.delete-btn {
+      font-size: 14px;
+      padding: 6px 10px;
+    }
+  }
 </style>
 </head>
 <body>
