@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Armoire Hardware Info</title>
+  <title>Equipment List</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
@@ -180,8 +180,8 @@
       }
 
       td:nth-of-type(1)::before { content: "Equipment"; }
-      td:nth-of-type(2)::before { content: "Datasheet"; }
-      td:nth-of-type(3)::before { content: "Armoire Number"; }
+      td:nth-of-type(2)::before { content: "Description"; }
+      td:nth-of-type(3)::before { content: "Cabinet"; }
       td:nth-of-type(4)::before { content: "Actions"; }
 
       #addForm {
@@ -207,16 +207,16 @@
 </head>
 <body>
 
-  <h1>Armoire Equipment List</h1>
+  <h1>Equipment List</h1>
 
-  <input type="text" id="searchInput" placeholder="Search by Equipment or Armoire..." />
+  <input type="text" id="searchInput" placeholder="Search by equipment or cabinet..." />
 
   <table id="equipmentTable">
     <thead>
       <tr>
         <th>Equipment</th>
-        <th>Datasheet</th>
-        <th>Armoire Number</th>
+        <th>Description</th>
+        <th>Cabinet</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -226,9 +226,9 @@
   </table>
 
   <form id="addForm">
-    <input type="text" id="equipName" placeholder="Equipment Name" required />
-    <textarea id="datasheetText" placeholder="Datasheet text here..." rows="2" required></textarea>
-    <input type="text" id="armoireNumber" placeholder="Armoire Number" required />
+    <input type="text" id="equipName" placeholder="Equipment" required />
+    <textarea id="datasheetText" placeholder="Description..." rows="2" required></textarea>
+    <input type="text" id="armoireNumber" placeholder="Cabinet" required />
     <button type="submit">Add Equipment</button>
   </form>
 
